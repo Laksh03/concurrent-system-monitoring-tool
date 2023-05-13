@@ -1,6 +1,45 @@
 # concurrent-system-monitoring-tool
 This is a modifyed version of the linux-system-monitoring-tool program that utilizes forks, pipes, and signals to make more efficient use of hardware through concurrency. 
 
+How to run the program: 
+
+C program that will report different metrics of the utilization of a linux system as described below.
+
+The program should accept several command line arguments:
+
+--system
+        
+	to indicate that only the system usage should be generated
+
+
+--user
+
+        to indicate that only the users usage should be generated
+
+
+--graphics  (+2 bonus points)
+
+        to include graphical output in the cases where a graphical outcome is possible as indicated below.
+
+
+--sequential
+
+        to indicate that the information will be output sequentially without needing to "refresh" the screen (useful if you would like to redirect the output into a file)
+
+ 
+
+--samples=N
+
+        if used the value N will indicate how many times the statistics are going to be collected and results will be average and reported based on the N number of repetitions.
+If not value is indicated the default value will be 10.
+
+
+--tdelay=T
+
+        to indicate how frequently to sample in seconds.
+If not value is indicated the default value will be 1 sec.
+
+
 How did I solve the problem of concurrency?
 
 What I did step by step: 
@@ -87,42 +126,4 @@ This function takes in pointers for all those cpu time measurements found in /pr
 void print_cpu_info(long int *prev_t_total, long int *prev_t_usage)
 
 This function takes in long int *prev_t_total, and long int *prev_t_usage. The values stored in these addresses are needed for the function to calculate cpu usage and print it. The calculation used for cpu usage is found at https://www.kgoettler.com/post/proc-stat/ Once that is done the function takes the new t_total and new t_usage it calculated, and assigns it to *prev_t_total and *prev_t_usage. So that when the function gets called again with these pointers it's then able to make another cpu usage calculation.
-
-How to run the program: 
-
-C program that will report different metrics of the utilization of a linux system as described below.
-
-The program should accept several command line arguments:
-
---system
-        
-	to indicate that only the system usage should be generated
-
-
---user
-
-        to indicate that only the users usage should be generated
-
-
---graphics  (+2 bonus points)
-
-        to include graphical output in the cases where a graphical outcome is possible as indicated below.
-
-
---sequential
-
-        to indicate that the information will be output sequentially without needing to "refresh" the screen (useful if you would like to redirect the output into a file)
-
- 
-
---samples=N
-
-        if used the value N will indicate how many times the statistics are going to be collected and results will be average and reported based on the N number of repetitions.
-If not value is indicated the default value will be 10.
-
-
---tdelay=T
-
-        to indicate how frequently to sample in seconds.
-If not value is indicated the default value will be 1 sec.
 
